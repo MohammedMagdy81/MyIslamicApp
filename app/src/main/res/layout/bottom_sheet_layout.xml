@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@drawable/sheet_bg"
+    android:layout_margin="12dp"
+
+    android:id="@+id/sheet_container"
+    android:orientation="vertical">
+
+
+
+    <TextView
+        android:id="@+id/sheet_text_select_qari"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:text="Select Qari "
+        android:padding="12dp"
+        android:textColor="@color/black"
+        />
+
+
+    <RadioGroup
+        android:id="@+id/sheet_audio_radio_group"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        >
+
+
+        <RadioButton
+            android:id="@+id/abde_baset_moratil"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:text="عبدالباسط عبدالصمد مرتل"
+            android:paddingStart="8dp"
+            android:textColor="@color/black"
+            />
+        <RadioButton
+            android:id="@+id/abdul_wadood_haneef_rare"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:text="عبد الودود حنيف"
+            android:paddingStart="8dp"
+            android:textColor="@color/black"
+            />
+        <RadioButton
+            android:id="@+id/abdurrashid_sufi_shu3ba"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:text="عبد الرشيد صوفي- رواية شعبة"
+            android:paddingStart="8dp"
+            android:textColor="@color/black"
+            />
+    </RadioGroup>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/sheet_btn_save"
+        android:layout_margin="16dp"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:text="Save"
+        android:textAllCaps="false"
+        android:backgroundTint="@color/btnSave"
+        />
+</LinearLayout>
