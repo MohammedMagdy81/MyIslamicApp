@@ -19,6 +19,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="4dp"
             android:padding="6dp"
+            android:gravity="center"
             android:text="أذكار الصباح والمساء "
             android:textColor="@color/colorPrimaryDark"
             android:textSize="22sp"
