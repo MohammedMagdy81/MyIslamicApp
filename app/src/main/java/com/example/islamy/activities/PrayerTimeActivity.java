@@ -4,6 +4,9 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.work.ExistingPeriodicWorkPolicy;
+import androidx.work.PeriodicWorkRequest;
+import androidx.work.WorkManager;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,10 +19,13 @@ import com.example.islamy.databinding.ActivityPrayerTimeBinding;
 import com.example.islamy.model.prayertime.PrayerResponse;
 import com.example.islamy.model.prayertime.MyTimings;
 import com.example.islamy.model.prayertime.Timings;
+import com.example.islamy.notification.AzanUtils;
+import com.example.islamy.notification.RegisterPrayersTimeWorker;
 import com.example.islamy.viewmodels.PrayerTimeViewModel;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.concurrent.TimeUnit;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -36,6 +42,7 @@ public class PrayerTimeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityPrayerTimeBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        Calendar calendar = Calendar.getInstance();
         binding.bottomNavigation.setSelectedItemId(R.id.menu_prayers);
         viewModel = new ViewModelProvider(this).get(PrayerTimeViewModel.class);
 
@@ -43,10 +50,15 @@ public class PrayerTimeActivity extends AppCompatActivity {
         setUpNavigation();
         setUpCalender();
         observeToLiveData();
-        viewModel.observeToPrayers(8, 9, 2022);
+        viewModel.observeToPrayers(calendar.get(Calendar.DAY_OF_MONTH), calendar.get(Calendar.MONTH) + 1,
+                calendar.get(Calendar.YEAR));
+
+        AzanUtils.registerPrayerTimeWorker(getApplicationContext());
 
 
     }
+
+
 
     private void observeToLiveData() {
         viewModel.getMyTimingsLiveData().observe(this, myTimings -> {

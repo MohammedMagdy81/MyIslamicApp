@@ -9,4 +9,12 @@ public class Constant {
 
     public static final String ZEKR_TYPE="zekrType";
     public static final String HADEETH_POSITION= "position";
+
+    public static final String CHANNEL_ID="Azan_channel";
+    public static final String CHANNEL_NAME="Al-Azan";
+    public static final int NOTIFICATION_ID=1;
+
+
+    public static final String NOTIFICATION_TITLE="Title";
+    public static final String NOTIFICATION_BODY="body";
 }
