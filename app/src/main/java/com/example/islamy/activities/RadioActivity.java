@@ -1,6 +1,7 @@
 package com.example.islamy.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Intent;
@@ -24,9 +25,9 @@ public class RadioActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding= ActivityRadioBinding.inflate(getLayoutInflater());
+        binding = ActivityRadioBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        viewModel= new ViewModelProvider(this).get(RadioViewModel.class);
+        viewModel = new ViewModelProvider(this).get(RadioViewModel.class);
         binding.bottomNavigation.setSelectedItemId(R.id.menu_radio);
         setUpMediaPlayer();
         setUpNavigation();
@@ -36,14 +37,15 @@ public class RadioActivity extends AppCompatActivity {
     }
 
     private void initClickListener() {
-        adapter.onPlayItemClick= (position, item) -> {
+        adapter.onPlayItemClick = (position, item) -> {
             playRadio(item.getRadioUrl());
         };
-        adapter.onStopItemClick= (position, item) -> {
+        adapter.onStopItemClick = (position, item) -> {
             stopRadio();
         };
     }
-    private void playRadio(String radioUrl){
+
+    private void playRadio(String radioUrl) {
         stopRadio();
         try {
             mediaPlayer.setDataSource(radioUrl);
@@ -53,8 +55,9 @@ public class RadioActivity extends AppCompatActivity {
             e.printStackTrace();
         }
     }
-    private void stopRadio(){
-        if (mediaPlayer.isPlaying()){
+
+    private void stopRadio() {
+        if (mediaPlayer.isPlaying()) {
             mediaPlayer.stop();
         }
         mediaPlayer.reset();
@@ -65,54 +68,60 @@ public class RadioActivity extends AppCompatActivity {
         viewModel.getRadioData().observe(this, radioItems -> {
             adapter.setChannels(radioItems);
         });
-        viewModel.showProgressState().observe(this, aBoolean -> {
-            if (aBoolean){
-                binding.progress.setVisibility(View.GONE);
-            }
-        });
+       viewModel.showProgressState().observe(this, show -> {
+           if (show){
+               binding.progress.setVisibility(View.VISIBLE);
+               binding.radioBg.setVisibility(View.GONE);
+           }else{
+               binding.progress.setVisibility(View.GONE);
+               binding.radioBg.setVisibility(View.VISIBLE);
+           }
+       });
     }
 
     private void setUpAdapter() {
         binding.channelsRv.setHasFixedSize(true);
-        adapter=new RadioAdapter();
-        binding.channelsRv .setAdapter(adapter);
+        adapter = new RadioAdapter();
+        binding.channelsRv.setAdapter(adapter);
     }
 
     private void setUpMediaPlayer() {
-        mediaPlayer= new MediaPlayer();
+        mediaPlayer = new MediaPlayer();
     }
-
 
 
     private void setUpNavigation() {
         binding.bottomNavigation.setOnNavigationItemSelectedListener(item -> {
-            switch(item.getItemId())
-            {
+            switch (item.getItemId()) {
                 case R.id.menu_azkar:
-                    startActivity(new Intent(this,AzkarActivity.class));
-                    overridePendingTransition(0,0);
+                    startActivity(new Intent(this, AzkarActivity.class));
+                    overridePendingTransition(0, 0);
                     finish();
                     return true;
 
                 case R.id.menu_quran:
-                    startActivity(new Intent(this,QuranActivity.class));
-                    overridePendingTransition(0,0);
+                    startActivity(new Intent(this, QuranActivity.class));
+                    overridePendingTransition(0, 0);
                     finish();
                     return true;
                 case R.id.menu_ahadeth:
                     startActivity(new Intent(this, AhadethListActivity.class));
-                    overridePendingTransition(0,0);
+                    overridePendingTransition(0, 0);
                     finish();
                     return true;
+
+                case R.id.menu_prayers:
+                    startActivity(new Intent(this, PrayerTimeActivity.class));
+                    overridePendingTransition(0, 0);
+                    finish();
+                    return true;
+
                 case R.id.menu_radio:
                     return true;
             }
             return false;
         });
     }
-
-
-
 
 
 }

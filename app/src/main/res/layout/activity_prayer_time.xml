@@ -4,58 +4,45 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#34E0E0E0"
-    tools:context=".activities.RadioActivity">
+    tools:context=".activities.PrayerTimeActivity">
 
-    <TextView
-        android:id="@+id/text_view"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:gravity="center"
-        android:layout_margin="12dp"
-        android:textSize="32sp"
-        android:textColor="@color/colorPrimaryDark"
-        android:text="إذاعات متنوعة "
-
-        />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/channels_rv"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="12dp"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/text_view" />
-
-    <ProgressBar
-        android:id="@+id/progress"
+    <DatePicker
+        android:id="@+id/dataPicker"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:theme="@style/ProgressBar"
-        android:visibility="visible"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:headerBackground="@color/purple_200"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <ImageView
-        android:id="@+id/radio_bg"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:src="@drawable/radio_bg"
-        android:visibility="gone"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHeight_percent=".25"
-        app:tint="@color/colorPrimaryDark"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/channels_rv"
-        app:layout_constraintWidth_percent=".30" />
+        android:datePickerMode="calendar"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/prayers_time_rv"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginHorizontal="12dp"
+        android:layout_marginTop="24dp"
+        android:padding="12dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toTopOf="@id/bottom_navigation"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dataPicker"
+        tools:listitem="@layout/item_prayer" />
+
+    <ProgressBar
+        android:id="@+id/progress_bar_prayers"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        app:layout_constraintTop_toBottomOf="@id/dataPicker"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"
@@ -68,5 +55,4 @@
         app:itemTextColor="@drawable/bottom_navigation_state"
         app:menu="@menu/islami_menu"
         />
-
 </androidx.constraintlayout.widget.ConstraintLayout>

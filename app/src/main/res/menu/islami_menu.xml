@@ -32,4 +32,12 @@
         android:iconTint="@color/grey"
         />
 
+    <item
+        android:id="@+id/menu_prayers"
+        android:enabled="true"
+        android:icon="@drawable/prayer_times"
+        android:title="Prayer Time"
+        android:iconTint="@color/grey"
+        />
+
 </menu>

@@ -71,6 +71,12 @@ public class AhadethListActivity extends AppCompatActivity implements AhadethLis
                     overridePendingTransition(0,0);
                     finish();
                     return true;
+
+                case R.id.menu_prayers:
+                    startActivity(new Intent(this, PrayerTimeActivity.class));
+                    overridePendingTransition(0,0);
+                    finish();
+                    return true;
             }
             return false;
         });

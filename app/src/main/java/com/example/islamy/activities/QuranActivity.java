@@ -61,6 +61,11 @@ public class QuranActivity extends AppCompatActivity implements SurahAdapter.OnS
                     finish();
                     return true;
 
+                case R.id.menu_prayers:
+                    startActivity(new Intent(this, PrayerTimeActivity.class));
+                    overridePendingTransition(0,0);
+                    finish();
+                    return true;
 
                 case R.id.menu_quran:
                     return true;
