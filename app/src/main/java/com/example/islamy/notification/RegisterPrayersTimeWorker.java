@@ -45,7 +45,7 @@ public class RegisterPrayersTimeWorker extends Worker {
             Calendar calendar= Calendar.getInstance();
 
             int year= calendar.get(Calendar.YEAR);
-            int month= calendar.get(Calendar.MONTH);
+            int month= calendar.get(Calendar.MONTH)+1;
 
             // call this api again to register data of prayer time . . .
             Response<PrayerResponse> timesResponse = ApiClient.getApi().getPrayers
@@ -74,32 +74,33 @@ public class RegisterPrayersTimeWorker extends Worker {
                             .setRequiresCharging(false)
                             .build();
 
-                    String PRAYER_TAG = "AZAN_TAG";
-                    OneTimeWorkRequest mRequest =
-                            new OneTimeWorkRequest.Builder(AzanNotification.class)
-                                    .setInputData(input)
-                                    .setConstraints(constraints)
-                                    .setInitialDelay(calculatePrayersDelay(year,month,day,prayers), TimeUnit.MILLISECONDS)
-                                    .build();
+                    String prayerTag = ""+year+""+month+""+day+ " "+ prayers.getPrayerName();
+                    OneTimeWorkRequest mRequest = new OneTimeWorkRequest
+                            .Builder(AzanNotification.class)
+                            .addTag(prayerTag)
+                            .setInitialDelay(calculatePrayersDelay(year,month,day,prayers), TimeUnit.MILLISECONDS)
+                            .setInputData(input)
+                            .build();
 
                     // tell work manger to do this request
                     WorkManager.getInstance(getApplicationContext())
-                            .enqueueUniqueWork(PRAYER_TAG,
+                            .enqueueUniqueWork(prayerTag,
                                     ExistingWorkPolicy.REPLACE, mRequest) ;
                 });
 
             }
-
+            return Result.success();
         } catch (IOException e) {
             e.printStackTrace();
+            return Result.retry();
         }
 
-        return Result.success();
+
     }
 
     private long calculatePrayersDelay(int year,int month,int day,MyTimings prayers){
 
-        String pattern="yyyy-MM-dd HH:mm";
+        String pattern="yyyy/MM/dd HH:mm";
         DecimalFormat decimalFormat= new DecimalFormat("00");
         String time = prayers.getPrayerTime().split(" ")[0];
 

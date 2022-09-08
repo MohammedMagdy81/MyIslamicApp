@@ -50,10 +50,10 @@ public class PrayerTimeActivity extends AppCompatActivity {
         setUpNavigation();
         setUpCalender();
         observeToLiveData();
-        viewModel.observeToPrayers(calendar.get(Calendar.DAY_OF_MONTH), calendar.get(Calendar.MONTH) + 1,
+        viewModel.observeToPrayers(this,calendar.get(Calendar.DAY_OF_MONTH), calendar.get(Calendar.MONTH) + 1,
                 calendar.get(Calendar.YEAR));
 
-        AzanUtils.registerPrayerTimeWorker(getApplicationContext());
+        AzanUtils.registerPrayerTimeWorker(this);
 
 
     }
@@ -88,7 +88,7 @@ public class PrayerTimeActivity extends AppCompatActivity {
         Calendar calendar = Calendar.getInstance();
         binding.dataPicker.init(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH),
                 calendar.get(Calendar.DAY_OF_MONTH), (datePicker, year, month, day) -> {
-                    viewModel.observeToPrayers(day, month + 1, year);
+                    viewModel.observeToPrayers(this,day, month + 1, year);
                 });
     }
 

@@ -1,5 +1,7 @@
 package com.example.islamy.viewmodels;
 
+import android.content.Context;
+
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
@@ -8,6 +10,7 @@ import com.example.islamy.model.prayertime.PrayerResponse;
 import com.example.islamy.model.prayertime.MyTimings;
 import com.example.islamy.model.prayertime.Timings;
 import com.example.islamy.network.ApiClient;
+import com.example.islamy.notification.AzanUtils;
 
 import java.util.ArrayList;
 
@@ -38,7 +41,7 @@ public class PrayerTimeViewModel extends ViewModel {
         return ApiClient.getApi().getPrayers(city, country, method, month, year);
     }
 
-    public void observeToPrayers(int day,
+    public void observeToPrayers(Context context , int day,
                                  int month,
                                  int year) {
         showProgress.setValue(true);
@@ -49,6 +52,7 @@ public class PrayerTimeViewModel extends ViewModel {
                 Timings timings = response.body().getData().get(day - 1).getTimings();
                 ArrayList<MyTimings> myTimings = convertFromTimings(timings);
                 myTimingsLiveData.setValue(myTimings);
+                AzanUtils.registerPrayerTimeWorker(context);
             }
 
 
