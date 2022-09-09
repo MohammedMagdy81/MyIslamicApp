@@ -7,6 +7,7 @@
     android:background="@color/white"
     tools:context=".activities.PrayerTimeActivity">
 
+
     <DatePicker
         android:id="@+id/dataPicker"
         android:layout_width="wrap_content"
@@ -14,8 +15,9 @@
         android:headerBackground="@color/purple_200"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:datePickerMode="calendar"
+        android:datePickerMode="spinner"
         app:layout_constraintTop_toTopOf="parent"
+
         />
 
 
@@ -31,7 +33,6 @@
         app:layout_constraintBottom_toTopOf="@id/bottom_navigation"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dataPicker"
         tools:listitem="@layout/item_prayer" />
 
     <ProgressBar
