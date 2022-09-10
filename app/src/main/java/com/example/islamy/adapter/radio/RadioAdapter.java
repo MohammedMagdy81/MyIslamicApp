@@ -10,8 +10,10 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.islamy.R;
+import com.example.islamy.model.quran.SurahDetails;
 import com.example.islamy.model.radio.RadioItem;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class RadioAdapter extends RecyclerView.Adapter<RadioAdapter.RadioViewHolder> {
@@ -22,6 +24,11 @@ public class RadioAdapter extends RecyclerView.Adapter<RadioAdapter.RadioViewHol
     public RadioViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
        View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.item_radio,parent,false);
         return new RadioViewHolder(view);
+    }
+
+    public void filter(ArrayList<RadioItem> channels){
+        this.channels=channels;
+        notifyDataSetChanged();
     }
 
     @Override

@@ -19,18 +19,34 @@
         android:textSize="32sp"
         android:textColor="@color/colorPrimaryDark"
         android:text="إذاعات متنوعة "
+        />
 
+    <EditText
+        android:id="@+id/search_et"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="12dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/text_view"
+        app:layout_constraintBottom_toTopOf="@id/channels_rv"
+        android:layout_margin="12dp"
+        android:paddingStart="12dp"
+        android:drawablePadding="12dp"
+        android:drawableStart="@drawable/ic_search"
+        android:background="@drawable/bg_edit_txt"
         />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/channels_rv"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:orientation="horizontal"
-        android:layout_marginTop="12dp"
+        android:layout_margin="12dp"
+        app:layout_constraintTop_toBottomOf="@id/search_et"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/text_view" />
+         />
 
     <ProgressBar
         android:id="@+id/progress"

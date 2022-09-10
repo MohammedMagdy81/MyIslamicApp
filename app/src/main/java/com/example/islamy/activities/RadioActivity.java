@@ -7,14 +7,20 @@ import androidx.lifecycle.ViewModelProvider;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 
 import com.example.islamy.R;
 import com.example.islamy.adapter.radio.RadioAdapter;
 import com.example.islamy.databinding.ActivityRadioBinding;
+import com.example.islamy.model.quran.SurahDetails;
+import com.example.islamy.model.radio.RadioItem;
 import com.example.islamy.viewmodels.RadioViewModel;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class RadioActivity extends AppCompatActivity {
     private ActivityRadioBinding binding;
@@ -43,7 +49,42 @@ public class RadioActivity extends AppCompatActivity {
         adapter.onStopItemClick = (position, item) -> {
             stopRadio();
         };
+
+        binding.searchEt.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                filter(editable.toString());
+            }
+        });
     }
+
+    private void filter(String keyWord) {
+        ArrayList<RadioItem> channels = new ArrayList<>();
+        viewModel.getRadioData().observe(this, radioItems -> {
+
+            for (RadioItem item : radioItems) {
+                if (item.getName().contains(keyWord)) {
+                    channels.add(item);
+                    adapter.filter(channels);
+                }
+
+            }
+
+        });
+
+
+    }
+
 
     private void playRadio(String radioUrl) {
         stopRadio();
@@ -68,15 +109,15 @@ public class RadioActivity extends AppCompatActivity {
         viewModel.getRadioData().observe(this, radioItems -> {
             adapter.setChannels(radioItems);
         });
-       viewModel.showProgressState().observe(this, show -> {
-           if (show){
-               binding.progress.setVisibility(View.VISIBLE);
-               binding.radioBg.setVisibility(View.GONE);
-           }else{
-               binding.progress.setVisibility(View.GONE);
-               binding.radioBg.setVisibility(View.VISIBLE);
-           }
-       });
+        viewModel.showProgressState().observe(this, show -> {
+            if (show) {
+                binding.progress.setVisibility(View.VISIBLE);
+                binding.radioBg.setVisibility(View.GONE);
+            } else {
+                binding.progress.setVisibility(View.GONE);
+                binding.radioBg.setVisibility(View.VISIBLE);
+            }
+        });
     }
 
     private void setUpAdapter() {

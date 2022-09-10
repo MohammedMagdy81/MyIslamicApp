@@ -28,7 +28,7 @@
         android:id="@+id/menu_ahadeth"
         android:enabled="true"
         android:icon="@drawable/muhammad"
-        android:title="Radio"
+        android:title="Ahadeeth"
         android:iconTint="@color/grey"
         />
 
