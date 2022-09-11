@@ -1,6 +1,7 @@
 package com.example.islamy.viewmodels;
 
 import android.content.Context;
+import android.media.MediaPlayer;
 
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
@@ -12,6 +13,7 @@ import com.example.islamy.model.prayertime.Timings;
 import com.example.islamy.network.ApiClient;
 import com.example.islamy.notification.AzanUtils;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 import retrofit2.Call;
@@ -63,6 +65,9 @@ public class PrayerTimeViewModel extends ViewModel {
         });
     }
 
+
+
+
     public MutableLiveData<ArrayList<MyTimings>> getMyTimingsLiveData() {
         return myTimingsLiveData;
     }
@@ -77,6 +82,10 @@ public class PrayerTimeViewModel extends ViewModel {
         result.add(new MyTimings(timings.getIsha(), "Isha"));
         return result;
     }
+
+
+
+
 
 
 }

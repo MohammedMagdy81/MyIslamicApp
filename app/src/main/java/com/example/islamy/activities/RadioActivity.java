@@ -71,7 +71,6 @@ public class RadioActivity extends AppCompatActivity {
     private void filter(String keyWord) {
         ArrayList<RadioItem> channels = new ArrayList<>();
         viewModel.getRadioData().observe(this, radioItems -> {
-
             for (RadioItem item : radioItems) {
                 if (item.getName().contains(keyWord)) {
                     channels.add(item);

@@ -54,8 +54,10 @@ public class SurahDetailsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivitySurahDetailsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
         soraNo = getIntent().getIntExtra(Constant.SORA_NO, 0);
         viewModel = new ViewModelProvider(this).get(SurahDetailsViewModel.class);
+
         setUpReceivedData();
         setUpRecyclerView();
         getSurahTranslation(english, soraNo);
@@ -67,8 +69,10 @@ public class SurahDetailsActivity extends AppCompatActivity {
 
     @SuppressLint("ClickableViewAccessibility")
     private void listenAudio(String qari) {
+
         mediaPlayer = new MediaPlayer();
         binding.seekBar.setMax(100);
+
         binding.playBtn.setOnClickListener(view -> {
             if (mediaPlayer.isPlaying()) {
                 handler.removeCallbacks(updater);
@@ -165,6 +169,7 @@ public class SurahDetailsActivity extends AppCompatActivity {
                 audioGroup = view.findViewById(R.id.sheet_audio_radio_group);
                 int audioId = audioGroup.getCheckedRadioButtonId();
                 audioButton = view.findViewById(audioId);
+
                 if (audioId == -1) {
                     Toast.makeText(this, "No Qari Selected !", Toast.LENGTH_SHORT).show();
                 } else {

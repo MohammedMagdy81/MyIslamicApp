@@ -43,9 +43,8 @@ public class RegisterPrayersTimeWorker extends Worker {
     public Result doWork() {
         try {
             Calendar calendar= Calendar.getInstance();
-
             int year= calendar.get(Calendar.YEAR);
-            int month= calendar.get(Calendar.MONTH)+1;
+            int month= calendar.get(Calendar.MONTH);
 
             // call this api again to register data of prayer time . . .
             Response<PrayerResponse> timesResponse = ApiClient.getApi().getPrayers
@@ -65,13 +64,6 @@ public class RegisterPrayersTimeWorker extends Worker {
                     Data input = new Data.Builder()
                             .putString(Constant.NOTIFICATION_TITLE, prayers.getPrayerName())
                             .putString(Constant.NOTIFICATION_BODY, "حان الان موعد الصلاة ")
-                            .build();
-
-                    //set Some Constrains
-                    Constraints constraints = new Constraints.Builder()
-                            .setRequiredNetworkType(NetworkType.NOT_REQUIRED)
-                            .setRequiresBatteryNotLow(true)
-                            .setRequiresCharging(false)
                             .build();
 
                     String prayerTag = ""+year+""+month+""+day+ " "+ prayers.getPrayerName();
