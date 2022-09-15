@@ -3,8 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_margin="12dp"
-    app:cardCornerRadius="24dp">
+    android:layout_margin="8dp"
+    app:cardCornerRadius="16dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -19,7 +19,6 @@
             android:layout_margin="4dp"
             android:padding="6dp"
             android:gravity="center"
-            android:text="أذكار الصباح والمساء "
             android:textColor="@color/colorPrimaryDark"
             android:textSize="22sp"
             app:layout_constraintBottom_toBottomOf="parent"

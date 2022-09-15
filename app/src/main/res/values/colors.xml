@@ -10,9 +10,9 @@
     <color name="purple_200">#FFBB86FC</color>
     <color name="purple_500">#FF6200EE</color>
     <color name="purple_700">#FF3700B3</color>
-    <color name="colorPrimary">#9669D1</color>
-    <color name="colorPrimaryDark">#ff3f2467</color>
-    <color name="colorAccent">#fff9af96</color>
+    <color name="colorPrimary">#AE2A47F1</color>
+    <color name="colorPrimaryDark">#E12744ED</color>
+    <color name="colorAccent">#E12744ED</color>
     <color name="light_grey">#6FE0E0E0</color>
 
 </resources>

@@ -12,7 +12,7 @@ public class Constant {
 
     public static final String CHANNEL_ID="Azan_channel";
     public static final String CHANNEL_NAME="Al-Azan";
-    public static final int NOTIFICATION_ID=1;
+    public static final int NOTIFICATION_ID=0;
 
 
     public static final String NOTIFICATION_TITLE="Title";

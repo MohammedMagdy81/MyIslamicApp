@@ -47,14 +47,14 @@ public class PrayerTimeViewModel extends ViewModel {
                                  int month,
                                  int year) {
         showProgress.setValue(true);
-        getPrayers("Cairo", "Egypt", 5, month, year).enqueue(new Callback<PrayerResponse>() {
+        getPrayers("Cairo", "Egypt", 5, month+1, year).enqueue(new Callback<PrayerResponse>() {
             @Override
             public void onResponse(Call<PrayerResponse> call, Response<PrayerResponse> response) {
                 showProgress.setValue(false);
                 Timings timings = response.body().getData().get(day - 1).getTimings();
                 ArrayList<MyTimings> myTimings = convertFromTimings(timings);
                 myTimingsLiveData.setValue(myTimings);
-                AzanUtils.registerPrayerTimeWorker(context);
+                AzanUtils.registerPrayerTimeWorker(context.getApplicationContext());
             }
 
 
@@ -74,12 +74,12 @@ public class PrayerTimeViewModel extends ViewModel {
 
     public ArrayList<MyTimings> convertFromTimings(Timings timings) {
         ArrayList<MyTimings> result = new ArrayList<>();
-        result.add(new MyTimings(timings.getFajr(), "Fajr"));
-        result.add(new MyTimings(timings.getSunrise(), "Sunrise"));
-        result.add(new MyTimings(timings.getDhuhr(), "Duhr"));
-        result.add(new MyTimings(timings.getAsr(), "Asr"));
-        result.add(new MyTimings(timings.getMaghrib(), "Maghreb"));
-        result.add(new MyTimings(timings.getIsha(), "Isha"));
+        result.add(new MyTimings(timings.getFajr(), "Fajr","الفجر"));
+        result.add(new MyTimings(timings.getSunrise(), "Sunrise","شروق الشمس"));
+        result.add(new MyTimings(timings.getDhuhr(), "Duhr","الظهر"));
+        result.add(new MyTimings(timings.getAsr(), "Asr","العصر"));
+        result.add(new MyTimings(timings.getMaghrib(), "Maghreb","المغرب"));
+        result.add(new MyTimings(timings.getIsha(), "Isha","العشاء"));
         return result;
     }
 

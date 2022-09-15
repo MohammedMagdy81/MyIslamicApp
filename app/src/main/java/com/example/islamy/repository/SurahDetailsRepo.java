@@ -3,9 +3,13 @@ package com.example.islamy.repository;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
+import com.example.islamy.adapter.quran.SurahDetailsAdapter;
+import com.example.islamy.model.quran.SurahDetails;
 import com.example.islamy.model.quranresponse.SurahDetailsResponse;
 import com.example.islamy.network.ApiClient;
 import com.example.islamy.network.JsonPlaceHolderApi;
+
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -19,6 +23,7 @@ public class SurahDetailsRepo {
     public SurahDetailsRepo(){
         jsonPlaceHolderApi= ApiClient.getInstance().create(JsonPlaceHolderApi.class);
         surahsDetailsData = new MutableLiveData<>();
+
     }
 
     public LiveData<SurahDetailsResponse> getSurahDetails(String lang, int soraId){
@@ -37,4 +42,10 @@ public class SurahDetailsRepo {
         });
       return surahsDetailsData;
     }
+
+
+
+
+
+
 }

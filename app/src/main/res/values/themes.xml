@@ -23,7 +23,7 @@
 
 
     <style name="ProgressBar">
-        <item name="colorSecondary">@color/colorPrimary</item>
+
     </style>
 
 </resources>

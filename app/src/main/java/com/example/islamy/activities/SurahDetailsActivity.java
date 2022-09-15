@@ -89,7 +89,7 @@ public class SurahDetailsActivity extends AppCompatActivity {
             SeekBar seekBar = (SeekBar) view;
             int playPosition = (mediaPlayer.getDuration() / 100) * seekBar.getProgress();
             mediaPlayer.seekTo(playPosition);
-            binding.startTime.setText(timeToMilliSecond(mediaPlayer.getCurrentPosition()));
+            binding.startTime.setText(viewModel.timeToMilliSecond(mediaPlayer.getCurrentPosition()));
             return false;
         });
         mediaPlayer.setOnBufferingUpdateListener((mediaPlayer, position) -> {
@@ -118,7 +118,7 @@ public class SurahDetailsActivity extends AppCompatActivity {
         try {
             mediaPlayer.setDataSource("https://download.quranicaudio.com/quran/" + qari + "/" + str.trim() + ".mp3");
             mediaPlayer.prepare();
-            binding.totalTime.setText(timeToMilliSecond(mediaPlayer.getDuration()));
+            binding.totalTime.setText(viewModel.timeToMilliSecond(mediaPlayer.getDuration()));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -127,7 +127,7 @@ public class SurahDetailsActivity extends AppCompatActivity {
     private Runnable updater = () -> {
         updateSeekBar();
         long currentDuration = mediaPlayer.getCurrentPosition();
-        binding.startTime.setText(timeToMilliSecond(currentDuration));
+        binding.startTime.setText(viewModel.timeToMilliSecond(currentDuration));
     };
 
     private void updateSeekBar() {
@@ -138,25 +138,6 @@ public class SurahDetailsActivity extends AppCompatActivity {
     }
 
     // to Convert Time from Long to String
-    private String timeToMilliSecond(long time) {
-        String timerString = "";
-        String secondString = "";
-
-        int hour = (int) (time / (1000 * 60 * 60));
-        int minutes = (int) (time % (1000 * 60 * 60)) / (1000 * 60);
-        int second = (int) ((time % (1000 * 60 * 60)) % (1000 * 60) / 1000);
-
-        if (hour > 0) {
-            timerString = hour + ":";
-        }
-        if (second < 10) {
-            secondString = "0" + second;
-        } else {
-            secondString = second + "";
-        }
-        timerString = timerString + minutes + ":" + secondString;
-        return timerString;
-    }
 
     private void setUpQari() {
         binding.btnSetting.setOnClickListener(v -> {
@@ -230,7 +211,9 @@ public class SurahDetailsActivity extends AppCompatActivity {
     private void getSurahTranslation(String lang, int soraNo) {
 
         viewModel.surahsDetailsData(lang, soraNo).observe(this, surahDetailsResponse -> {
+
             for (SurahDetails surahDetails : surahDetailsResponse.getResult()) {
+
                 surahs.add(new SurahDetails(
                         surahDetails.getSura(),
                         surahDetails.getAya(),
@@ -274,7 +257,6 @@ public class SurahDetailsActivity extends AppCompatActivity {
 
     @Override
     protected void onPause() {
-
         if (mediaPlayer.isPlaying()) {
             handler.removeCallbacks(updater);
             mediaPlayer.pause();

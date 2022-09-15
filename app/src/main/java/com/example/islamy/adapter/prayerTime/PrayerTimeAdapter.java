@@ -17,6 +17,7 @@ public class PrayerTimeAdapter extends RecyclerView.Adapter<PrayerTimeAdapter.Pr
 
     private ArrayList<MyTimings> myTimings;
 
+
     public void setMyTimings(ArrayList<MyTimings> myTimings) {
         this.myTimings = myTimings;
         notifyDataSetChanged();
@@ -32,6 +33,7 @@ public class PrayerTimeAdapter extends RecyclerView.Adapter<PrayerTimeAdapter.Pr
     @Override
     public void onBindViewHolder(@NonNull PrayerTimeViewHolder holder, int position) {
         holder.bind(myTimings.get(position));
+
     }
 
     @Override
@@ -40,16 +42,20 @@ public class PrayerTimeAdapter extends RecyclerView.Adapter<PrayerTimeAdapter.Pr
     }
 
     class PrayerTimeViewHolder extends RecyclerView.ViewHolder{
-        TextView prayerName,prayerTime;
+        TextView prayerName,prayerTime,arabicPrayerName;
         public PrayerTimeViewHolder(@NonNull View itemView) {
             super(itemView);
+
             prayerName=itemView.findViewById(R.id.prayer_name);
             prayerTime=itemView.findViewById(R.id.prayer_time);
+            arabicPrayerName=itemView.findViewById(R.id.prayer_arabic_name);
+
         }
 
         public void bind(MyTimings timing) {
             prayerName.setText(timing.getPrayerName());
             prayerTime.setText(timing.getPrayerTime());
+            arabicPrayerName.setText(timing.getPrayerArabicN());
         }
     }
 }
